@@ -1,10 +1,10 @@
 import "./App.css";
-import Auth from "./Auth";
+import Dashboard from "./Dashboard/Dashboard";
 
 function App() {
   return (
     <>
-      <Auth />
+      <Dashboard />
     </>
   );
 }
