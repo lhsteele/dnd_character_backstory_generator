@@ -1,46 +1,48 @@
-// Step 1: Import dotenv to load environment variables from the .env file
-require("dotenv").config();
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import dotenv from "dotenv";
 
-// Step 2: Import OpenAI package (assuming you have installed the OpenAI client)
-const { OpenAI } = require("openai");
+dotenv.config();
 
-// Step 3: Get the OpenAI API key from the environment variable
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // Use the key stored in the .env file
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// Step 4: Function to generate DnD character backstory
-async function generateBackstory(name, race, characterClass, traits, tone) {
-  const prompt = `Create a DnD character backstory for a ${race} ${characterClass} named ${name}. The character has the following traits: ${traits.join(
-    ", "
-  )}. Make the backstory detailed and engaging, and use a ${tone} tone. A ${tone} tone means: if the tone is "kid-friendly", keep it light-hearted and adventurous, maybe even funny, and avoid dark or mature themes. If the tone is "young adult", you can incorporate darker themes, but keep it appropriate for teens.`;
-
+export async function generateBackstory(
+  name,
+  race,
+  characterClass,
+  traits,
+  tone
+) {
   try {
-    const response = await openai.chat.completions.create({
-      messages: [{ role: "user", content: prompt }],
-      model: "gpt-3.5-turbo", // Or gpt-4 if you have access
-      max_tokens: 500,
-      temperature: 0.7,
-    });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-    return response.choices[0].message.content.trim();
+    const prompt = `Create a DnD character backstory for a ${race} ${characterClass} named ${name}. 
+        The character has the following traits: ${traits.join(", ")}. 
+        Make the backstory detailed and engaging, and use a ${tone} tone. 
+        A ${tone} tone means: if the tone is "kid-friendly", keep it light-hearted and adventurous, maybe even funny, 
+        and avoid dark or mature themes. If the tone is "young adult", you can incorporate darker themes, but keep it appropriate for teens.`;
+
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const backstory = response.text();
+
+    return backstory;
   } catch (error) {
     console.error("Error generating backstory:", error);
     return "Sorry, something went wrong while generating the backstory.";
   }
 }
 
-// Example usage
-const characterName = "Thalindra";
-const characterRace = "Elf";
-const characterClass = "Wizard";
-const characterTraits =
-  "brave, intelligent, loyal, has a deep connection to nature";
+const testName = "Aldor";
+const testRace = "Elf";
+const testClass = "Ranger";
+const testTraits = ["brave", "loyal", "curious"];
+const testTone = "kid-friendly";
 
-generateBackstory(characterName, characterRace, characterClass, characterTraits)
-  .then((backstory) => {
-    console.log("Generated Backstory:", backstory);
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+const backstory = await generateBackstory(
+  testName,
+  testRace,
+  testClass,
+  testTraits,
+  testTone
+);
+console.log("Generated Backstory:\n", backstory);
