@@ -1,23 +1,14 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent } from "react";
 import Select from "../Components/Select/Select";
-import { fetchMonsterList } from "../api/attributesListApi";
-import { AttributeType } from "../types";
 import "./MonstersSelection.css";
+import useFetch from "../hooks/useFetch";
 
 const MonstersSelection: FunctionComponent = () => {
-  const [monsterList, setMonsterList] = useState<AttributeType[]>([]);
+  const { data, error, loading } = useFetch<{
+    results: { index: string; name: string }[];
+  }>(["monsters"]);
 
-  useEffect(() => {
-    const getMonsterList = async () => {
-      try {
-        const list = await fetchMonsterList();
-        setMonsterList(list.results);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getMonsterList();
-  }, []);
+  console.log(error, loading);
 
   return (
     <div className="monsters-selection germania-one-regular">
@@ -25,7 +16,7 @@ const MonstersSelection: FunctionComponent = () => {
         htmlFor="monster-select"
         id="monster-select"
         label="Monsters"
-        options={monsterList}
+        options={data.monsters?.results}
         onOptionSelect={() => {}}
       />
     </div>
