@@ -13,7 +13,13 @@ export const CLASS_KEYS = {
   wizard: "Wizard",
 };
 
-export const TONE = {
-  kidFriendly: "Kid friendly",
-  youngAdult: "Young adult",
-};
+export const TONE = [
+  {
+    index: "kidFriendly",
+    name: "Kid Friendly",
+  },
+  {
+    index: "youngAdult",
+    name: "Young adult",
+  },
+];
