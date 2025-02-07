@@ -1,11 +1,11 @@
 import "./App.css";
-import Dashboard from "./Dashboard/Dashboard";
+import AttributesSelection from "./AttributesSelection/AttributesSelection";
 
 function App() {
   return (
-    <>
-      <Dashboard />
-    </>
+    <div className="app">
+      <AttributesSelection />
+    </div>
   );
 }
 
