@@ -1,0 +1,6 @@
+.monsters-selection {
+  background-color: #f4e1c3;
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+}
