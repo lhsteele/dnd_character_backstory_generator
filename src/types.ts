@@ -5,5 +5,5 @@ export type ToneType = {
 export type AttributeType = {
   index: string;
   name: string;
-  url: string;
+  url?: string;
 };

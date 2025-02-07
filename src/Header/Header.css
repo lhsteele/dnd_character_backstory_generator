@@ -1,0 +1,11 @@
+.page-header {
+  background-color: #f4cfd9;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 48px;
+  letter-spacing: 0.2rem;
+}
