@@ -11,3 +11,9 @@
 .attribute-select {
   background-color: #f4e1c3;
 }
+
+.select-label-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
