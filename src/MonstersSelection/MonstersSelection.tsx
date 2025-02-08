@@ -8,7 +8,7 @@ const MonstersSelection: FunctionComponent = () => {
     results: { index: string; name: string }[];
   }>(["monsters"]);
 
-  console.log(error, loading);
+  // console.log(error, loading);
 
   return (
     <div className="monsters-selection germania-one-regular">
@@ -17,6 +17,8 @@ const MonstersSelection: FunctionComponent = () => {
         id="monster-select"
         label="Monsters"
         options={data.monsters?.results}
+        error={error}
+        loading={loading}
         onOptionSelect={() => {}}
       />
     </div>

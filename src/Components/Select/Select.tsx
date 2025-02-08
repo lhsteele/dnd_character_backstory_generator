@@ -8,7 +8,12 @@ type SelectProps = {
   label: string;
   options?: AttributeType[] | null;
   tooltip?: ReactNode;
-  onOptionSelect: () => void;
+  loading?: boolean;
+  error?: string;
+  onOptionSelect: (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    optionType: string
+  ) => void;
 };
 
 const Select: FunctionComponent<SelectProps> = ({
@@ -17,6 +22,8 @@ const Select: FunctionComponent<SelectProps> = ({
   label,
   options,
   tooltip,
+  loading,
+  error,
   onOptionSelect,
 }) => {
   return (
@@ -27,11 +34,28 @@ const Select: FunctionComponent<SelectProps> = ({
         </label>
         {tooltip && tooltip}
       </div>
-      <select id={id} className="attribute-select" onChange={onOptionSelect}>
-        {options?.map((op, idx) => (
-          <option key={`${op.index}-${idx}`}>{op.name}</option>
-        ))}
-      </select>
+      {loading ? (
+        <div aria-busy="true">
+          <span className="material-symbols-outlined">hourglass</span>
+        </div>
+      ) : error ? (
+        <div role="alert" className="select-error">
+          Error
+        </div>
+      ) : (
+        <select
+          id={id}
+          className="attribute-select"
+          onChange={(e) => onOptionSelect(e, label)}
+        >
+          <option value="" disabled selected>
+            {`Select ${label.toLowerCase()}`}
+          </option>
+          {options?.map((op, idx) => (
+            <option key={op.index ?? `${op.name}-${idx}`}>{op.name}</option>
+          ))}
+        </select>
+      )}
     </div>
   );
 };

@@ -1,6 +1,9 @@
 .attributes-selection {
   background-color: #f4e1c3;
   padding: 50px;
+}
+
+.attributes-selection-container {
   display: flex;
   justify-content: space-between;
 }
@@ -12,12 +15,12 @@
   gap: 10px;
 }
 
-.attribute-select {
-  background-color: #f4e1c3;
-}
+.attribute-select,
 .character-name-input {
   background-color: #f4e1c3;
-  border: 1px solid #8c4c13;
+  border: 1px solid #4f565c;
+  border-radius: 8px;
+  padding: 5px;
 }
 
 .attributes-label {
@@ -28,4 +31,33 @@
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.generate-btn {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #4f565c;
+  color: white;
+  width: 20%;
+}
+
+.backstory-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.backstory-text-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.backstory-text {
+  border: 1px solid #4f565c;
+  border-radius: 8px;
+  width: 80%;
 }
