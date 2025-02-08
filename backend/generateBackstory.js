@@ -16,7 +16,7 @@ export async function generateBackstory(
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const prompt = `Create a DnD character backstory for a ${race} ${characterClass} named ${name}. 
-        The character has the following traits: ${traits.join(", ")}. 
+        The character has the following traits: ${traits}. 
         Make the backstory detailed and engaging, and use a ${tone} tone. 
         A ${tone} tone means: if the tone is "kid-friendly", keep it light-hearted and adventurous, maybe even funny, 
         and avoid dark or mature themes. If the tone is "young adult", you can incorporate darker themes, but keep it appropriate for teens.`;
@@ -32,17 +32,17 @@ export async function generateBackstory(
   }
 }
 
-const testName = "Aldor";
-const testRace = "Elf";
-const testClass = "Ranger";
-const testTraits = ["brave", "loyal", "curious"];
-const testTone = "kid-friendly";
+// const testName = "Aldor";
+// const testRace = "Elf";
+// const testClass = "Ranger";
+// const testTraits = ["brave", "loyal", "curious"];
+// const testTone = "kid-friendly";
 
-const backstory = await generateBackstory(
-  testName,
-  testRace,
-  testClass,
-  testTraits,
-  testTone
-);
-console.log("Generated Backstory:\n", backstory);
+// const backstory = await generateBackstory(
+//   testName,
+//   testRace,
+//   testClass,
+//   testTraits,
+//   testTone
+// );
+// console.log("Generated Backstory:\n", backstory);

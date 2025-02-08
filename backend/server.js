@@ -1,11 +1,20 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const { generateBackstory } = require("./generateBackstory"); // Import the function from generateBackstory.js
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import { generateBackstory } from "./generateBackstory.js";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Update this if frontend runs on a different port
+    methods: "GET,POST",
+    allowedHeaders: "Content-Type",
+  })
+);
 
 // Middleware to parse JSON request bodies
 app.use(express.json());

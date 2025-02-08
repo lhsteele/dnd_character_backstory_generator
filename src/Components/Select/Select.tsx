@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode } from "react";
+import { FunctionComponent, ReactNode, useState } from "react";
 import { AttributeType } from "../../types";
 import "./Select.css";
 
@@ -26,6 +26,15 @@ const Select: FunctionComponent<SelectProps> = ({
   error,
   onOptionSelect,
 }) => {
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleSelect = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    label: string
+  ) => {
+    setSelectedValue(e.target.value);
+    onOptionSelect(e, label);
+  };
   return (
     <div className="select-container">
       <div className="select-label-container">
@@ -46,9 +55,10 @@ const Select: FunctionComponent<SelectProps> = ({
         <select
           id={id}
           className="attribute-select"
-          onChange={(e) => onOptionSelect(e, label)}
+          onChange={(e) => handleSelect(e, label)}
+          value={selectedValue}
         >
-          <option value="" disabled selected>
+          <option value="" disabled>
             {`Select ${label.toLowerCase()}`}
           </option>
           {options?.map((op, idx) => (
