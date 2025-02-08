@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import "./AttributesSelection.css";
 import { TONE } from "../constants";
 import Select from "../Components/Select/Select";
@@ -18,35 +18,39 @@ const AttributesSelection: FunctionComponent = () => {
     tone?: string | undefined;
   }>();
   const [backstory, setBackstory] = useState("");
+  const [displayedBackstory, setDisplayedBackstory] = useState("");
   const [backstoryLoading, setBackstoryLoading] = useState(false);
 
+  useEffect(() => {
+    if (!backstory) return;
+
+    let index = 0;
+    setDisplayedBackstory(""); // Reset displayed text
+
+    const interval = setInterval(() => {
+      setDisplayedBackstory((prev) => prev + backstory[index]);
+      index++;
+
+      if (index >= backstory.length) {
+        clearInterval(interval);
+      }
+    }, 50); // Adjust speed as needed
+
+    return () => clearInterval(interval);
+  }, [backstory]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentInput = e.target.value;
-    setInputValue(currentInput);
+    setInputValue(e.target.value);
   };
 
   const handleSelect = (
     e: React.ChangeEvent<HTMLSelectElement>,
     optionType: string
   ) => {
-    const selected = e.target.value;
-
-    const currentSelectedAttributes = { ...selectedAttributes };
-    switch (optionType) {
-      case "Class":
-        currentSelectedAttributes["class"] = selected;
-        break;
-      case "Race":
-        currentSelectedAttributes["race"] = selected;
-        break;
-      case "Traits":
-        currentSelectedAttributes["traits"] = selected;
-        break;
-      case "Tone":
-        currentSelectedAttributes["tone"] = selected;
-        break;
-    }
-    setSelectedAttributes(currentSelectedAttributes);
+    setSelectedAttributes((prev) => ({
+      ...prev,
+      [optionType.toLowerCase()]: e.target.value,
+    }));
   };
 
   const handleGenerateBtnClick = () => {
@@ -149,7 +153,12 @@ const AttributesSelection: FunctionComponent = () => {
               <span className="material-symbols-outlined">hourglass</span>
             </div>
           ) : (
-            <textarea className="backstory-text">{backstory}</textarea>
+            <textarea
+              id="backstory-text"
+              className="backstory-text"
+              value={displayedBackstory}
+              readOnly
+            />
           )}
         </div>
       </div>
