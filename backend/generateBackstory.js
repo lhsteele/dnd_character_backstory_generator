@@ -10,16 +10,22 @@ export async function generateBackstory(
   race,
   characterClass,
   traits,
-  tone
+  tone,
+  hasNickname
 ) {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const prompt = `Create a DnD character backstory for a ${race} ${characterClass} named ${name}. 
         The character has the following traits: ${traits}. 
+        If ${hasNickname}, create a nickname for the character and include this in the backstory.
         Make the backstory detailed and engaging, and use a ${tone} tone. 
+
         A ${tone} tone means: if the tone is "kid-friendly", keep it light-hearted and adventurous, maybe even funny, 
-        and avoid dark or mature themes. If the tone is "young adult", you can incorporate darker themes, but keep it appropriate for teens.`;
+        and avoid dark or mature themes. If the tone is "young adult", you can incorporate darker themes, but keep it appropriate for teens.
+        
+        Keep the backstory between 200 to 250 words, and use they/them for pronouns.
+        `;
 
     const result = await model.generateContent(prompt);
     const response = result.response;

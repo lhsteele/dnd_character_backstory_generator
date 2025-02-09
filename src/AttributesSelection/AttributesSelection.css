@@ -63,3 +63,8 @@
   height: 250px;
   padding: 10px;
 }
+
+.nickname-container {
+  display: flex;
+  gap: 5px;
+}

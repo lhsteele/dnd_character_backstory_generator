@@ -20,21 +20,20 @@ const AttributesSelection: FunctionComponent = () => {
   const [backstory, setBackstory] = useState("");
   const [displayedBackstory, setDisplayedBackstory] = useState("");
   const [backstoryLoading, setBackstoryLoading] = useState(false);
+  const [hasNickname, setHasNickname] = useState(false);
 
   useEffect(() => {
     if (!backstory) return;
 
     let index = 0;
-    setDisplayedBackstory(""); // Reset displayed text
+    setDisplayedBackstory(backstory[0]);
 
     const interval = setInterval(() => {
-      setDisplayedBackstory((prev) => prev + backstory[index]);
-      index++;
-
-      if (index >= backstory.length) {
-        clearInterval(interval);
+      if (index < backstory.length - 1) {
+        setDisplayedBackstory((prev) => prev + backstory[index]);
+        index++;
       }
-    }, 50); // Adjust speed as needed
+    }, 50);
 
     return () => clearInterval(interval);
   }, [backstory]);
@@ -51,6 +50,10 @@ const AttributesSelection: FunctionComponent = () => {
       ...prev,
       [optionType.toLowerCase()]: e.target.value,
     }));
+  };
+
+  const handleNicknameCheck = () => {
+    setHasNickname((prev) => !prev);
   };
 
   const handleGenerateBtnClick = () => {
@@ -70,9 +73,10 @@ const AttributesSelection: FunctionComponent = () => {
             race,
             cls,
             traits,
-            tone
+            tone,
+            hasNickname
           );
-          console.log("backstory response", backstory);
+
           setBackstory(backstory);
           setBackstoryLoading(false);
         } catch (error) {
@@ -98,6 +102,15 @@ const AttributesSelection: FunctionComponent = () => {
             value={inputValue}
             onChange={handleInputChange}
           />
+          <div className="nickname-container">
+            <input
+              type="checkbox"
+              id="nickname-checkbox"
+              checked={hasNickname}
+              onChange={handleNicknameCheck}
+            />
+            <label htmlFor="nickname-checkbox">Add nickname</label>
+          </div>
         </div>
         <Select
           htmlFor="class-select"

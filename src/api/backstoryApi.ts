@@ -5,7 +5,8 @@ export const generateBackstory = async (
   race: string,
   characterClass: string,
   traits: string,
-  tone: string
+  tone: string,
+  hasNickname?: boolean
 ) => {
   try {
     const response = await axios.post(
@@ -16,6 +17,7 @@ export const generateBackstory = async (
         characterClass,
         traits,
         tone,
+        hasNickname,
       }
     );
 
