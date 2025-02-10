@@ -5,6 +5,9 @@ import Select from "../Components/Select/Select";
 import Tooltip from "../Components/Tooltip/Tooltip";
 import useFetch from "../hooks/useFetch";
 import { generateBackstory } from "../api/backstoryApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDiceD20 } from "@fortawesome/free-solid-svg-icons";
+import useRandomRoll from "../hooks/useRandomRoll";
 
 const AttributesSelection: FunctionComponent = () => {
   const [inputValue, setInputValue] = useState("");
@@ -17,10 +20,28 @@ const AttributesSelection: FunctionComponent = () => {
     traits?: string | undefined;
     tone?: string | undefined;
   }>();
+  const [randomizedAttributes, setRandomizedAttributes] = useState<{
+    class?: string | undefined;
+    race?: string | undefined;
+    traits?: string | undefined;
+    tone?: string | undefined;
+  }>();
   const [backstory, setBackstory] = useState("");
   const [displayedBackstory, setDisplayedBackstory] = useState("");
   const [backstoryLoading, setBackstoryLoading] = useState(false);
   const [hasNickname, setHasNickname] = useState(false);
+
+  const {
+    randomClassIdx,
+    randomRaceIdx,
+    randomTraitsIdx,
+    randomToneIdx,
+    rollRandomAttributes,
+  } = useRandomRoll(
+    data?.classes?.results.length,
+    data?.races?.results.length,
+    data?.traits?.results.length
+  );
 
   useEffect(() => {
     if (!backstory) return;
@@ -54,6 +75,17 @@ const AttributesSelection: FunctionComponent = () => {
 
   const handleNicknameCheck = () => {
     setHasNickname((prev) => !prev);
+  };
+
+  const handleRandomize = () => {
+    rollRandomAttributes();
+    const currentRandomAttributes = { ...randomizedAttributes };
+    currentRandomAttributes.class = data?.classes?.results[randomClassIdx].name;
+    currentRandomAttributes.race = data?.races?.results[randomRaceIdx].name;
+    currentRandomAttributes.traits =
+      data?.traits?.results[randomTraitsIdx].name;
+    currentRandomAttributes.tone = TONE[randomToneIdx].name;
+    setRandomizedAttributes(currentRandomAttributes);
   };
 
   const handleGenerateBtnClick = () => {
@@ -120,6 +152,7 @@ const AttributesSelection: FunctionComponent = () => {
           error={error}
           options={data?.classes?.results}
           onOptionSelect={handleSelect}
+          randomizedSelection={randomizedAttributes?.class}
         />
         <Select
           htmlFor="race-select"
@@ -129,6 +162,7 @@ const AttributesSelection: FunctionComponent = () => {
           error={error}
           options={data?.races?.results}
           onOptionSelect={handleSelect}
+          randomizedSelection={randomizedAttributes?.race}
         />
         <Select
           htmlFor="traits-select"
@@ -138,6 +172,7 @@ const AttributesSelection: FunctionComponent = () => {
           error={error}
           options={data?.traits?.results}
           onOptionSelect={handleSelect}
+          randomizedSelection={randomizedAttributes?.traits}
         />
         <Select
           htmlFor="tone-select"
@@ -147,6 +182,7 @@ const AttributesSelection: FunctionComponent = () => {
           loading={loading}
           error={error}
           onOptionSelect={handleSelect}
+          randomizedSelection={randomizedAttributes?.tone}
           tooltip={
             <Tooltip
               tooltipContent={
@@ -155,6 +191,10 @@ const AttributesSelection: FunctionComponent = () => {
             />
           }
         />
+
+        <button onClick={handleRandomize}>
+          <FontAwesomeIcon icon={faDiceD20} size="2x" />
+        </button>
       </div>
       <div className="backstory-container">
         <button className="generate-btn" onClick={handleGenerateBtnClick}>
@@ -173,6 +213,10 @@ const AttributesSelection: FunctionComponent = () => {
               readOnly
             />
           )}
+          <div className="textarea-controls">
+            <span className="material-symbols-outlined">content_copy</span>
+            <span className="material-symbols-outlined">print</span>
+          </div>
         </div>
       </div>
     </div>

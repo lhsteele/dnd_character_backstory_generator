@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode, useState } from "react";
+import { FunctionComponent, ReactNode, useEffect, useState } from "react";
 import { AttributeType } from "../../types";
 import "./Select.css";
 
@@ -10,6 +10,7 @@ type SelectProps = {
   tooltip?: ReactNode;
   loading?: boolean;
   error?: string;
+  randomizedSelection?: string;
   onOptionSelect: (
     e: React.ChangeEvent<HTMLSelectElement>,
     optionType: string
@@ -24,9 +25,16 @@ const Select: FunctionComponent<SelectProps> = ({
   tooltip,
   loading,
   error,
+  randomizedSelection,
   onOptionSelect,
 }) => {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState(randomizedSelection || "");
+
+  useEffect(() => {
+    if (randomizedSelection) {
+      setSelectedValue(randomizedSelection);
+    }
+  }, [randomizedSelection]);
 
   const handleSelect = (
     e: React.ChangeEvent<HTMLSelectElement>,
