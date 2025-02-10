@@ -43,7 +43,7 @@ const useFetch = <T,>(resources: string[]) => {
       }
     };
     fetchData();
-  }, [resources]);
+  }, [resources, prevResources]);
   return { data, error, loading };
 };
 
