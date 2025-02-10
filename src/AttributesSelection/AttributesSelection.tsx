@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiceD20 } from "@fortawesome/free-solid-svg-icons";
 import useRandomRoll from "../hooks/useRandomRoll";
 import { generateRandomCharacterName } from "../api/randomCharacterNameApi";
+import { printText } from "../helpers";
 
 const AttributesSelection: FunctionComponent = () => {
   const [inputValue, setInputValue] = useState("");
@@ -146,6 +147,10 @@ const AttributesSelection: FunctionComponent = () => {
     }
   };
 
+  const handlePrint = () => {
+    printText(`${inputValue}'s Backstory`, backstory);
+  };
+
   return (
     <div className="attributes-selection germania-one-regular">
       <div className="attributes-selection-container">
@@ -258,8 +263,14 @@ const AttributesSelection: FunctionComponent = () => {
                 }
               />
             </button>
-
-            <span className="material-symbols-outlined">print</span>
+            <button onClick={handlePrint}>
+              <Tooltip
+                tooltipContent="Print"
+                tooltipIcon={
+                  <span className="material-symbols-outlined">print</span>
+                }
+              />
+            </button>
           </div>
         </div>
       </div>

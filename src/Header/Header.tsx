@@ -4,7 +4,7 @@ import "./Header.css";
 const Header: FunctionComponent = () => {
   return (
     <header className="page-header germania-one-regular">
-      <h1>D&D Character Backstory Generator</h1>
+      <h1>D&D Character Generator</h1>
     </header>
   );
 };
