@@ -1,17 +1,21 @@
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AttributesSelection from "./AttributesSelection/AttributesSelection";
-import Divider from "./Components/Divider/Divider";
 import Header from "./Header/Header";
 import MonstersSelection from "./MonstersSelection/MonstersSelection";
 
 function App() {
   return (
-    <div className="app">
-      <Header />
-      <AttributesSelection />
-      <Divider />
-      <MonstersSelection />
-    </div>
+    <BrowserRouter>
+      <div className="app germania-one-regular">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Navigate to="/character" replace />} />
+          <Route path="/character" element={<AttributesSelection />} />
+          <Route path="/monsters" element={<MonstersSelection />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
