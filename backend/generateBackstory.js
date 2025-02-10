@@ -34,6 +34,6 @@ export async function generateBackstory(
     return backstory;
   } catch (error) {
     console.error("Error generating backstory:", error);
-    return "Sorry, something went wrong while generating the backstory.";
+    return "Sorry, something went wrong while generating the backstory. Please try again.";
   }
 }

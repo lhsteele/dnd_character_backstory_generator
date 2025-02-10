@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import "./AttributesSelection.css";
 import { TONE } from "../constants";
 import Select from "../Components/Select/Select";
@@ -32,6 +32,8 @@ const AttributesSelection: FunctionComponent = () => {
   const [backstoryLoading, setBackstoryLoading] = useState(false);
   const [hasNickname, setHasNickname] = useState(false);
   const [randomGenerationLoading, setRandomGenerationLoading] = useState(false);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const [copied, setCopied] = useState(false);
 
   const {
     randomClassIdx,
@@ -99,6 +101,7 @@ const AttributesSelection: FunctionComponent = () => {
       data?.traits?.results[randomTraitsIdx].name;
     currentRandomAttributes.tone = TONE[randomToneIdx].name;
     setRandomizedAttributes(currentRandomAttributes);
+    setSelectedAttributes(currentRandomAttributes);
     getRandomCharacterName();
   };
 
@@ -132,6 +135,14 @@ const AttributesSelection: FunctionComponent = () => {
       };
 
       getBackstory();
+    }
+  };
+
+  const handleCopy = () => {
+    if (textAreaRef.current) {
+      textAreaRef.current.select();
+      navigator.clipboard.writeText(backstory);
+      setCopied(true);
     }
   };
 
@@ -202,6 +213,9 @@ const AttributesSelection: FunctionComponent = () => {
               tooltipContent={
                 "Kid-friendly means the backstory will be light-hearted and avoid dark or mature themes. Young adult means it may incorporate darker themes while keeping it appropriate for teens."
               }
+              tooltipIcon={
+                <span className="material-symbols-outlined">info</span>
+              }
             />
           }
         />
@@ -226,6 +240,7 @@ const AttributesSelection: FunctionComponent = () => {
             </div>
           ) : (
             <textarea
+              ref={textAreaRef}
               id="backstory-text"
               className="backstory-text"
               value={displayedBackstory}
@@ -233,7 +248,17 @@ const AttributesSelection: FunctionComponent = () => {
             />
           )}
           <div className="textarea-controls">
-            <span className="material-symbols-outlined">content_copy</span>
+            <button onClick={handleCopy}>
+              <Tooltip
+                tooltipContent={copied ? "Copied!" : "Copy to clipboard"}
+                tooltipIcon={
+                  <span className="material-symbols-outlined">
+                    content_copy
+                  </span>
+                }
+              />
+            </button>
+
             <span className="material-symbols-outlined">print</span>
           </div>
         </div>

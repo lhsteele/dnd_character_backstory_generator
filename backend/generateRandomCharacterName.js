@@ -19,7 +19,7 @@ export async function generateRandomCharacterName() {
 
     return name;
   } catch (error) {
-    console.error("Error generating backstory:", error);
-    return "Sorry, something went wrong while generating the backstory.";
+    console.error("Error generating name:", error);
+    return "Sorry, something went wrong while generating the name. Please try again";
   }
 }
