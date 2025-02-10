@@ -37,18 +37,3 @@ export async function generateBackstory(
     return "Sorry, something went wrong while generating the backstory.";
   }
 }
-
-// const testName = "Aldor";
-// const testRace = "Elf";
-// const testClass = "Ranger";
-// const testTraits = ["brave", "loyal", "curious"];
-// const testTone = "kid-friendly";
-
-// const backstory = await generateBackstory(
-//   testName,
-//   testRace,
-//   testClass,
-//   testTraits,
-//   testTone
-// );
-// console.log("Generated Backstory:\n", backstory);

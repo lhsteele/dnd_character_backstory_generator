@@ -8,6 +8,7 @@ import { generateBackstory } from "../api/backstoryApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiceD20 } from "@fortawesome/free-solid-svg-icons";
 import useRandomRoll from "../hooks/useRandomRoll";
+import { generateRandomCharacterName } from "../api/randomCharacterNameApi";
 
 const AttributesSelection: FunctionComponent = () => {
   const [inputValue, setInputValue] = useState("");
@@ -30,6 +31,7 @@ const AttributesSelection: FunctionComponent = () => {
   const [displayedBackstory, setDisplayedBackstory] = useState("");
   const [backstoryLoading, setBackstoryLoading] = useState(false);
   const [hasNickname, setHasNickname] = useState(false);
+  const [randomGenerationLoading, setRandomGenerationLoading] = useState(false);
 
   const {
     randomClassIdx,
@@ -77,6 +79,17 @@ const AttributesSelection: FunctionComponent = () => {
     setHasNickname((prev) => !prev);
   };
 
+  const getRandomCharacterName = async () => {
+    setRandomGenerationLoading(true);
+    try {
+      const { name } = await generateRandomCharacterName();
+      setInputValue(name);
+    } catch (error) {
+      console.error(error);
+    }
+    setRandomGenerationLoading(false);
+  };
+
   const handleRandomize = () => {
     rollRandomAttributes();
     const currentRandomAttributes = { ...randomizedAttributes };
@@ -86,6 +99,7 @@ const AttributesSelection: FunctionComponent = () => {
       data?.traits?.results[randomTraitsIdx].name;
     currentRandomAttributes.tone = TONE[randomToneIdx].name;
     setRandomizedAttributes(currentRandomAttributes);
+    getRandomCharacterName();
   };
 
   const handleGenerateBtnClick = () => {
@@ -191,10 +205,15 @@ const AttributesSelection: FunctionComponent = () => {
             />
           }
         />
-
-        <button onClick={handleRandomize}>
-          <FontAwesomeIcon icon={faDiceD20} size="2x" />
-        </button>
+        {randomGenerationLoading ? (
+          <div className="loader">
+            <span className="material-symbols-outlined">hourglass</span>
+          </div>
+        ) : (
+          <button onClick={handleRandomize}>
+            <FontAwesomeIcon icon={faDiceD20} size="2x" />
+          </button>
+        )}
       </div>
       <div className="backstory-container">
         <button className="generate-btn" onClick={handleGenerateBtnClick}>
