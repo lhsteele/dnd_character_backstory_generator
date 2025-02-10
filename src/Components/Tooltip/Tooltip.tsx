@@ -1,21 +1,25 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, ReactNode, useState } from "react";
 import "./Tooltip.css";
 
 type TooltipProps = {
   tooltipContent: string;
+  tooltipIcon?: ReactNode;
 };
 
-const Tooltip: FunctionComponent<TooltipProps> = ({ tooltipContent }) => {
-  const [showInfoTooltip, setShowInfoTooltip] = useState(false);
+const Tooltip: FunctionComponent<TooltipProps> = ({
+  tooltipContent,
+  tooltipIcon,
+}) => {
+  const [showTooltip, setShowTooltip] = useState(false);
 
   return (
     <div
       className="tooltip-container"
-      onMouseOver={() => setShowInfoTooltip(true)}
-      onMouseLeave={() => setShowInfoTooltip(false)}
+      onMouseOver={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
     >
-      <span className="material-symbols-outlined">info</span>
-      {showInfoTooltip && <div className="tooltip">{tooltipContent}</div>}
+      {tooltipIcon && tooltipIcon}
+      {showTooltip && <div className="tooltip">{tooltipContent}</div>}
     </div>
   );
 };

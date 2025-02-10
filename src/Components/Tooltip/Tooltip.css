@@ -1,5 +1,6 @@
 .tooltip-container {
   position: relative;
+  cursor: pointer;
 }
 
 .tooltip {
@@ -9,6 +10,6 @@
   background-color: #f4e1c3;
   border: 1px solid #4f565c;
   width: 200px;
-  padding: 10px;
+  padding: 5px;
   border-radius: 8px;
 }
