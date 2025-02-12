@@ -1,31 +1,24 @@
 import axios from "axios";
 
-export const generateBackstory = async (
-  name: string,
-  race: string,
-  characterClass: string,
-  traits: string,
-  tone: string,
-  hasNickname?: boolean
+export const generateMonsterEncounter = async (
+  monsterType: string,
+  tone: string
 ) => {
+  console.log("here");
   try {
     const response = await axios.post(
-      "http://localhost:5000/generate-backstory",
+      "http://localhost:5000/generate-monster-encounter",
       {
-        name,
-        race,
-        characterClass,
-        traits,
+        monsterType,
         tone,
-        hasNickname,
       }
     );
-
-    return response.data.backstory;
+    console.log(response.data);
+    return response.data.encounter;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(
-        "Error generating backstory:",
+        "Error generating encounter:",
         error.response?.data || error.message
       );
 

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { generateBackstory } from "./generateBackstory.js";
 import { generateRandomCharacterName } from "./generateRandomCharacterName.js";
+import { generateMonsterEncounter } from "./generateMonsterEncounter.js";
 
 dotenv.config();
 
@@ -50,6 +51,23 @@ app.post("/generate-character-name", async (_, res) => {
   } catch (error) {
     console.error("Error generating name:", error);
     res.status(500).json({ error: "Error generating name" });
+  }
+});
+
+app.post("/generate-monster-encounter", async (req, res) => {
+  try {
+    const { monsterType, tone } = req.body;
+
+    if (!monsterType || !tone) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    const encounter = await generateMonsterEncounter(monsterType, tone);
+
+    res.json({ encounter });
+  } catch (error) {
+    console.error("Error generating encounter:", error);
+    res.status(500).json({ error: "Error generating encounter" });
   }
 });
 

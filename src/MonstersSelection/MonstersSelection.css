@@ -1,6 +1,11 @@
-.monsters-selection {
+.monster-selection {
+  display: flex;
+  flex-direction: column;
   background-color: #f4e1c3;
   padding: 50px;
+}
+
+.monster-selection-container {
   display: flex;
   justify-content: space-between;
 }
