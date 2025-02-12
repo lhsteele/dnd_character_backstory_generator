@@ -1,3 +1,5 @@
+import { RefObject } from "react";
+
 export const printText = (title: string, text: string) => {
   const printWindow = window.open("", "", "width=800,height=600");
   if (printWindow) {
@@ -20,5 +22,17 @@ export const printText = (title: string, text: string) => {
       </html>
     `);
     printWindow.document.close();
+  }
+};
+
+export const copyTextToClipboard = (
+  ref: RefObject<HTMLTextAreaElement>,
+  textToCopy: string,
+  setCopied: (_: boolean) => void
+) => {
+  if (ref.current) {
+    ref.current.select();
+    navigator.clipboard.writeText(textToCopy);
+    setCopied(true);
   }
 };

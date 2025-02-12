@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiceD20 } from "@fortawesome/free-solid-svg-icons";
 import useRandomRoll from "../hooks/useRandomRoll";
 import { generateRandomCharacterName } from "../api/randomCharacterNameApi";
-import { printText } from "../helpers";
+import TextArea from "../Components/TextArea/TextArea";
 
 const AttributesSelection: FunctionComponent = () => {
   const [inputValue, setInputValue] = useState("");
@@ -34,7 +34,6 @@ const AttributesSelection: FunctionComponent = () => {
   const [hasNickname, setHasNickname] = useState(false);
   const [randomGenerationLoading, setRandomGenerationLoading] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const [copied, setCopied] = useState(false);
 
   const {
     randomClassIdx,
@@ -139,18 +138,6 @@ const AttributesSelection: FunctionComponent = () => {
     }
   };
 
-  const handleCopy = () => {
-    if (textAreaRef.current) {
-      textAreaRef.current.select();
-      navigator.clipboard.writeText(backstory);
-      setCopied(true);
-    }
-  };
-
-  const handlePrint = () => {
-    printText(`${inputValue}'s Backstory`, backstory);
-  };
-
   return (
     <div className="attributes-selection germania-one-regular">
       <div className="attributes-selection-container">
@@ -237,7 +224,16 @@ const AttributesSelection: FunctionComponent = () => {
           </div>
         )}
       </div>
-      <div className="backstory-container">
+      <TextArea
+        ctaText="Generate backstory"
+        handleCTAClick={handleGenerateBtnClick}
+        textLoading={backstoryLoading}
+        textAreaRef={textAreaRef}
+        text={backstory}
+        displayedText={displayedBackstory}
+        printConfirmationText={`${inputValue}'s Backstory`}
+      />
+      {/* <div className="backstory-container">
         <button className="generate-btn" onClick={handleGenerateBtnClick}>
           Generate backstory
         </button>
@@ -256,7 +252,11 @@ const AttributesSelection: FunctionComponent = () => {
             />
           )}
           <div className="textarea-controls">
-            <button onClick={handleCopy}>
+            <button
+              onClick={() =>
+                copyTextToClipboard(textAreaRef, backstory, setCopied)
+              }
+            >
               <Tooltip
                 tooltipContent={copied ? "Copied!" : "Copy to clipboard"}
                 tooltipIcon={
@@ -276,7 +276,7 @@ const AttributesSelection: FunctionComponent = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
