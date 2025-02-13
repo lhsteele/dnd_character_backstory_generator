@@ -48,7 +48,7 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
             onClick={() => copyTextToClipboard(textAreaRef, text, setCopied)}
           >
             <Tooltip
-              tooltipContent={copied ? "Copied!" : "Copy to clipboard"}
+              tooltipContent={copied ? "Copied!" : "Copy"}
               tooltipIcon={
                 <span className="material-symbols-outlined">content_copy</span>
               }

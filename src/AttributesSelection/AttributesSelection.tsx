@@ -233,50 +233,6 @@ const AttributesSelection: FunctionComponent = () => {
         displayedText={displayedBackstory}
         printConfirmationText={`${inputValue}'s Backstory`}
       />
-      {/* <div className="backstory-container">
-        <button className="generate-btn" onClick={handleGenerateBtnClick}>
-          Generate backstory
-        </button>
-        <div className="backstory-text-container">
-          {backstoryLoading ? (
-            <div className="loader">
-              <span className="material-symbols-outlined">hourglass</span>
-            </div>
-          ) : (
-            <textarea
-              ref={textAreaRef}
-              id="backstory-text"
-              className="backstory-text"
-              value={displayedBackstory}
-              readOnly
-            />
-          )}
-          <div className="textarea-controls">
-            <button
-              onClick={() =>
-                copyTextToClipboard(textAreaRef, backstory, setCopied)
-              }
-            >
-              <Tooltip
-                tooltipContent={copied ? "Copied!" : "Copy to clipboard"}
-                tooltipIcon={
-                  <span className="material-symbols-outlined">
-                    content_copy
-                  </span>
-                }
-              />
-            </button>
-            <button onClick={handlePrint}>
-              <Tooltip
-                tooltipContent="Print"
-                tooltipIcon={
-                  <span className="material-symbols-outlined">print</span>
-                }
-              />
-            </button>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

@@ -4,7 +4,6 @@ export const generateMonsterEncounter = async (
   monsterType: string,
   tone: string
 ) => {
-  console.log("here");
   try {
     const response = await axios.post(
       "http://localhost:5000/generate-monster-encounter",
@@ -13,7 +12,7 @@ export const generateMonsterEncounter = async (
         tone,
       }
     );
-    console.log(response.data);
+
     return response.data.encounter;
   } catch (error) {
     if (axios.isAxiosError(error)) {
