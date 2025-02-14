@@ -139,7 +139,7 @@ const AttributesSelection: FunctionComponent = () => {
   };
 
   return (
-    <div className="attributes-selection germania-one-regular">
+    <div className="attributes-selection">
       <div className="attributes-selection-container">
         <div className="input-container">
           <label htmlFor="character-name-input" className="attributes-label ">

@@ -9,13 +9,18 @@ const Header: FunctionComponent = () => {
         <h1>D&D Character Generator</h1>
       </header>
       <div className="header-buttons-container">
-        <Link to="/character" className="header-button">
-          Generate character backstory
-        </Link>
-        <span className="material-symbols-outlined">diamond</span>
-        <Link to="/monsters" className="header-button">
-          Generate monster encounter
-        </Link>
+        <div className="navigation-button-container">
+          <span className="material-symbols-outlined">stat_0</span>
+          <Link to="/character" className="header-button">
+            Generate character backstory
+          </Link>
+        </div>
+        <div className="navigation-button-container">
+          <span className="material-symbols-outlined">stat_0</span>
+          <Link to="/monsters" className="header-button">
+            Generate monster encounter
+          </Link>
+        </div>
       </div>
     </div>
   );

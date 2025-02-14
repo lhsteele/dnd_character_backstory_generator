@@ -14,3 +14,24 @@
   display: flex;
   gap: 20px;
 }
+
+@media screen and (max-width: 767px) {
+  .monster-selection {
+    padding: 20px;
+  }
+
+  .monster-selection-container,
+  .monster-selection-dropdowns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .monster-selection-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
