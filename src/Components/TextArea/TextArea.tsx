@@ -52,6 +52,7 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
               tooltipIcon={
                 <span className="material-symbols-outlined">content_copy</span>
               }
+              leftPositioned
             />
           </button>
           <button

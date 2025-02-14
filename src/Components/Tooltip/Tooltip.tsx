@@ -4,11 +4,13 @@ import "./Tooltip.css";
 type TooltipProps = {
   tooltipContent: string;
   tooltipIcon?: ReactNode;
+  leftPositioned?: boolean;
 };
 
 const Tooltip: FunctionComponent<TooltipProps> = ({
   tooltipContent,
   tooltipIcon,
+  leftPositioned,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -19,7 +21,11 @@ const Tooltip: FunctionComponent<TooltipProps> = ({
       onMouseLeave={() => setShowTooltip(false)}
     >
       {tooltipIcon && tooltipIcon}
-      {showTooltip && <div className="tooltip">{tooltipContent}</div>}
+      {showTooltip && (
+        <div className={`tooltip ${leftPositioned ? "left-tooltip" : ""}`}>
+          {tooltipContent}
+        </div>
+      )}
     </div>
   );
 };
