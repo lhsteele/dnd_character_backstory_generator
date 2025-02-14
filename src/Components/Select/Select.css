@@ -13,3 +13,7 @@
   align-items: center;
   gap: 5px;
 }
+
+.activeOption {
+  background-color: #b0b0b1;
+}
