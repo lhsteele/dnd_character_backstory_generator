@@ -12,13 +12,13 @@ const Header: FunctionComponent = () => {
         <div className="navigation-button-container">
           <span className="material-symbols-outlined">stat_0</span>
           <Link to="/character" className="header-button">
-            Generate character backstory
+            Character backstory
           </Link>
         </div>
         <div className="navigation-button-container">
           <span className="material-symbols-outlined">stat_0</span>
           <Link to="/monsters" className="header-button">
-            Generate monster encounter
+            Monster encounter
           </Link>
         </div>
       </div>

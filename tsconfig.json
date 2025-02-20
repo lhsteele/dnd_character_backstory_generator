@@ -5,8 +5,8 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "types": ["vitest/globals"],
+    "types": ["vitest", "vitest/globals", "@testing-library/jest-dom"],
     "composite": true
   },
-  "include": ["src", "src/vitest.d.ts"]
+  "include": ["src", "src/vitest.d.ts", "test"]
 }

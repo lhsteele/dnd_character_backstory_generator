@@ -11,6 +11,7 @@
     "incremental": true,
     "noEmit": false,
     "esModuleInterop": true,
+    "types": ["vitest/globals"],
 
     /* Bundler and module system */
     "moduleResolution": "Node",
@@ -24,5 +25,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }
