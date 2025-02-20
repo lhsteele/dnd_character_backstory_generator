@@ -9,7 +9,7 @@ export async function generateBackstory(
   name,
   race,
   characterClass,
-  traits,
+  trait,
   tone,
   hasNickname
 ) {
@@ -17,7 +17,7 @@ export async function generateBackstory(
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const prompt = `Create a DnD character backstory for a ${race} ${characterClass} named ${name}. 
-        The character has the following traits: ${traits}. 
+        The character has the following trait: ${trait}. 
         If ${hasNickname}, create a nickname for the character and include this in the backstory.
         Make the backstory detailed and engaging, and use a ${tone} tone. 
 

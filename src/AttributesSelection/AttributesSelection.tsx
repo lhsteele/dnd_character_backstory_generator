@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useMemo, useRef, useState } from "react";
 import "./AttributesSelection.css";
 import { TONE } from "../constants";
 import Select from "../Components/Select/Select";
@@ -19,13 +19,13 @@ const AttributesSelection: FunctionComponent = () => {
   const [selectedAttributes, setSelectedAttributes] = useState<{
     class?: string | undefined;
     race?: string | undefined;
-    traits?: string | undefined;
+    trait?: string | undefined;
     tone?: string | undefined;
   }>();
   const [randomizedAttributes, setRandomizedAttributes] = useState<{
     class?: string | undefined;
     race?: string | undefined;
-    traits?: string | undefined;
+    trait?: string | undefined;
     tone?: string | undefined;
   }>();
   const [backstory, setBackstory] = useState("");
@@ -97,8 +97,7 @@ const AttributesSelection: FunctionComponent = () => {
     const currentRandomAttributes = { ...randomizedAttributes };
     currentRandomAttributes.class = data?.classes?.results[randomClassIdx].name;
     currentRandomAttributes.race = data?.races?.results[randomRaceIdx].name;
-    currentRandomAttributes.traits =
-      data?.traits?.results[randomTraitsIdx].name;
+    currentRandomAttributes.trait = data?.traits?.results[randomTraitsIdx].name;
     currentRandomAttributes.tone = TONE[randomToneIdx].name;
     setRandomizedAttributes(currentRandomAttributes);
     setSelectedAttributes(currentRandomAttributes);
@@ -109,10 +108,10 @@ const AttributesSelection: FunctionComponent = () => {
     if (
       selectedAttributes?.class &&
       selectedAttributes.race &&
-      selectedAttributes.traits &&
+      selectedAttributes.trait &&
       selectedAttributes.tone
     ) {
-      const { race, class: cls, traits, tone } = selectedAttributes;
+      const { race, class: cls, trait, tone } = selectedAttributes;
 
       const getBackstory = async () => {
         setBackstoryLoading(true);
@@ -121,7 +120,7 @@ const AttributesSelection: FunctionComponent = () => {
             inputValue,
             race,
             cls,
-            traits,
+            trait,
             tone,
             hasNickname
           );
@@ -137,6 +136,30 @@ const AttributesSelection: FunctionComponent = () => {
       getBackstory();
     }
   };
+
+  const optionsFullyFilled = useMemo(() => {
+    const requiredKeys = ["class", "race", "trait", "tone"];
+
+    const selectedAttributesIsFullyFilled =
+      selectedAttributes &&
+      requiredKeys.every(
+        (key) =>
+          selectedAttributes[key as keyof typeof selectedAttributes] !==
+          undefined
+      );
+    const randomAttributesIsFullyFilled =
+      randomizedAttributes &&
+      requiredKeys.every(
+        (key) =>
+          randomizedAttributes[key as keyof typeof selectedAttributes] !==
+          undefined
+      );
+
+    return (
+      inputValue &&
+      (selectedAttributesIsFullyFilled || randomAttributesIsFullyFilled)
+    );
+  }, [inputValue, selectedAttributes, randomizedAttributes]);
 
   return (
     <div className="attributes-selection">
@@ -184,12 +207,12 @@ const AttributesSelection: FunctionComponent = () => {
         <Select
           htmlFor="traits-select"
           id="traits-select"
-          label="Traits"
+          label="Trait"
           loading={loading}
           error={error}
           options={data?.traits?.results}
           onOptionSelect={handleSelect}
-          randomizedSelection={randomizedAttributes?.traits}
+          randomizedSelection={randomizedAttributes?.trait}
         />
         <Select
           htmlFor="tone-select"
@@ -225,6 +248,7 @@ const AttributesSelection: FunctionComponent = () => {
         )}
       </div>
       <TextArea
+        ctaDisabled={!optionsFullyFilled}
         ctaText="Generate backstory"
         handleCTAClick={handleGenerateBtnClick}
         textLoading={backstoryLoading}

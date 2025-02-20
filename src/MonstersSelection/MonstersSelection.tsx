@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useMemo, useRef, useState } from "react";
 import Select from "../Components/Select/Select";
 import "./MonstersSelection.css";
 import useFetch from "../hooks/useFetch";
@@ -87,6 +87,27 @@ const MonstersSelection: FunctionComponent = () => {
     setRandomGenerationLoading(false);
   };
 
+  const optionsFullyFilled = useMemo(() => {
+    const requiredKeys = ["monster", "tone"];
+
+    const selectedAttributesIsFullyFilled =
+      selectedAttributes &&
+      requiredKeys.every(
+        (key) =>
+          selectedAttributes[key as keyof typeof selectedAttributes] !==
+          undefined
+      );
+    const randomAttributesIsFullyFilled =
+      randomizedAttributes &&
+      requiredKeys.every(
+        (key) =>
+          randomizedAttributes[key as keyof typeof selectedAttributes] !==
+          undefined
+      );
+
+    return selectedAttributesIsFullyFilled || randomAttributesIsFullyFilled;
+  }, [selectedAttributes, randomizedAttributes]);
+
   return (
     <div className="monster-selection ">
       <div className="monster-selection-container">
@@ -136,6 +157,7 @@ const MonstersSelection: FunctionComponent = () => {
         )}
       </div>
       <TextArea
+        ctaDisabled={!optionsFullyFilled}
         ctaText="Generate encounter"
         handleCTAClick={handleGenerateBtnClick}
         textLoading={encounterLoading}

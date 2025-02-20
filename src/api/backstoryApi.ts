@@ -4,7 +4,7 @@ export const generateBackstory = async (
   name: string,
   race: string,
   characterClass: string,
-  traits: string,
+  trait: string,
   tone: string,
   hasNickname?: boolean
 ) => {
@@ -15,7 +15,7 @@ export const generateBackstory = async (
         name,
         race,
         characterClass,
-        traits,
+        trait,
         tone,
         hasNickname,
       }

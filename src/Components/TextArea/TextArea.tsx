@@ -4,6 +4,7 @@ import { copyTextToClipboard, printText } from "../../helpers";
 import "./TextArea.css";
 
 type TextAreaProps = {
+  ctaDisabled: boolean;
   ctaText: string;
   handleCTAClick: () => void;
   textLoading: boolean;
@@ -14,6 +15,7 @@ type TextAreaProps = {
 };
 
 const TextArea: FunctionComponent<TextAreaProps> = ({
+  ctaDisabled,
   ctaText,
   handleCTAClick,
   textLoading,
@@ -26,7 +28,11 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
 
   return (
     <div className="text-area">
-      <button className="cta-btn" onClick={handleCTAClick}>
+      <button
+        className="cta-btn"
+        onClick={handleCTAClick}
+        disabled={ctaDisabled}
+      >
         {ctaText}
       </button>
       <div className="text-area-container">
