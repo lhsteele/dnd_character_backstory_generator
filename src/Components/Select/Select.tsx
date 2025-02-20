@@ -53,10 +53,15 @@ const Select: FunctionComponent<SelectProps> = ({
       </div>
       {loading ? (
         <div aria-busy="true">
-          <span className="material-symbols-outlined">hourglass</span>
+          <span
+            className="material-symbols-outlined"
+            data-testid="loading-icon"
+          >
+            hourglass
+          </span>
         </div>
       ) : error ? (
-        <div role="alert" className="select-error">
+        <div role="alert" className="select-error" data-testid="error">
           Error
         </div>
       ) : (
