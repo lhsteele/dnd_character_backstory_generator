@@ -241,7 +241,7 @@ const AttributesSelection: FunctionComponent = () => {
         ) : (
           <div className="randomizer-btn-container">
             <label>Random</label>
-            <button onClick={handleRandomize}>
+            <button data-testid="random-btn" onClick={handleRandomize}>
               <FontAwesomeIcon icon={faDiceD20} size="2x" />
             </button>
           </div>
