@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/character" replace />} />
           <Route path="/character" element={<AttributesSelection />} />
-          <Route path="/monsters" element={<MonstersSelection />} />
+          <Route path="/monster" element={<MonstersSelection />} />
         </Routes>
       </div>
     </BrowserRouter>
