@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "node backend/index.js",
-    "build": "npx tsc -b tsconfig.app.json && vite build",
+    "build": "tsc -b tsconfig.app.json && vite build",
     "test": "vitest",
     "test:watch": "vitest --watch"
   },
