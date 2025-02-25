@@ -7,7 +7,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export async function generateMonsterEncounter(monsterType, tone) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
     const prompt = `Create a DnD monster encounter for ${monsterType} type of monster.
         There should be some type of obstacle or conflict that must be resolved in order

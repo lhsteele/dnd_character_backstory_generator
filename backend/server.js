@@ -22,9 +22,9 @@ app.use(express.json());
 
 app.post("/generate-backstory", async (req, res) => {
   try {
-    const { name, race, characterClass, traits, tone } = req.body;
+    const { name, race, characterClass, trait, tone } = req.body;
 
-    if (!name || !race || !characterClass || !traits || !tone) {
+    if (!name || !race || !characterClass || !trait || !tone) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -32,7 +32,7 @@ app.post("/generate-backstory", async (req, res) => {
       name,
       race,
       characterClass,
-      traits,
+      trait,
       tone
     );
 
