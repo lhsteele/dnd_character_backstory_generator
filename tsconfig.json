@@ -2,11 +2,15 @@
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.test.json" }
   ],
   "compilerOptions": {
-    "types": ["vitest", "vitest/globals", "@testing-library/jest-dom"],
-    "composite": true
+    "types": [],
+    "composite": true,
+    "moduleResolution": "bundler",
+    "module": "ESNext"
   },
-  "include": ["src", "src/vitest.d.ts", "test"]
+  "include": ["src"],
+  "exclude": ["node_modules/@types/jest", "__tests__", "test"]
 }
