@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "node backend/index.js",
-    "build": "tsc -b tsconfig.app.json && vite build",
+    "build": "npx tsc -b tsconfig.app.json && vite build",
     "test": "vitest",
     "test:watch": "vitest --watch"
   },
@@ -27,7 +27,8 @@
     "openai": "^4.83.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.1.5"
+    "react-router-dom": "^7.1.5",
+    "typescript": "^5.7.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
@@ -47,7 +48,6 @@
     "jsdom": "^26.0.0",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.3",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.5",
     "vitest": "^3.0.7"
