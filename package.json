@@ -11,6 +11,9 @@
     "start": "node backend/index.js",
     "test": "vitest"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
