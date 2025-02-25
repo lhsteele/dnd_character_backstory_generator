@@ -57,7 +57,8 @@ const MonstersSelection: FunctionComponent = () => {
           const encounter = await generateMonsterEncounter(monster, tone);
           setEncounter(encounter);
         } catch (error) {
-          console.error(error);
+          const e = error as Error;
+          console.error(e);
         }
         setEncounterLoading(false);
       }

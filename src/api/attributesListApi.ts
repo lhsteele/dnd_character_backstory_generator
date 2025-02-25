@@ -5,12 +5,13 @@ export const fetchClassList = async () => {
     const response = await axios.get("https://www.dnd5eapi.co/api/classes");
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(`Error fetching class list ${error}`);
-      throw error;
+    const e = error as Error;
+    if (axios.isAxiosError(e)) {
+      console.error(`Error fetching class list ${e}`);
+      throw e;
     } else {
-      console.error(`Unexpected error: ${error}`);
-      throw error;
+      console.error(`Unexpected error: ${e}`);
+      throw e;
     }
   }
 };
@@ -20,12 +21,13 @@ export const fetchRaceList = async () => {
     const response = await axios.get("https://www.dnd5eapi.co/api/races");
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(`Error fetching race list ${error}`);
-      throw error;
+    const e = error as Error;
+    if (axios.isAxiosError(e)) {
+      console.error(`Error fetching race list ${e}`);
+      throw e;
     } else {
-      console.error(`Unexpected error: ${error}`);
-      throw error;
+      console.error(`Unexpected error: ${e}`);
+      throw e;
     }
   }
 };
@@ -35,12 +37,13 @@ export const fetchMonsterList = async () => {
     const response = await axios.get("https://www.dnd5eapi.co/api/monsters");
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(`Error fetching monster list ${error}`);
-      throw error;
+    const e = error as Error;
+    if (axios.isAxiosError(e)) {
+      console.error(`Error fetching monster list ${e}`);
+      throw e;
     } else {
-      console.error(`Unexpected error: ${error}`);
-      throw error;
+      console.error(`Unexpected error: ${e}`);
+      throw e;
     }
   }
 };
@@ -50,12 +53,13 @@ export const fetchTraitsList = async () => {
     const response = await axios.get("https://www.dnd5eapi.co/api/traits");
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(`Error fetching traits list ${error}`);
-      throw error;
+    const e = error as Error;
+    if (axios.isAxiosError(e)) {
+      console.error(`Error fetching traits list ${e}`);
+      throw e;
     } else {
-      console.error(`Unexpected error: ${error}`);
-      throw error;
+      console.error(`Unexpected error: ${e}`);
+      throw e;
     }
   }
 };

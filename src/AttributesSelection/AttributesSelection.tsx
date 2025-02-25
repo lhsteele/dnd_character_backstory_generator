@@ -87,7 +87,8 @@ const AttributesSelection: FunctionComponent = () => {
       const { name } = await generateRandomCharacterName();
       setInputValue(name);
     } catch (error) {
-      console.error(error);
+      const e = error as Error;
+      console.error(e);
     }
     setRandomGenerationLoading(false);
   };
@@ -128,7 +129,8 @@ const AttributesSelection: FunctionComponent = () => {
           setBackstory(backstory);
           setBackstoryLoading(false);
         } catch (error) {
-          console.error(error);
+          const e = error as Error;
+          console.error(e);
           setBackstoryLoading(false);
         }
       };

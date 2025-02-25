@@ -23,20 +23,21 @@ export const generateBackstory = async (
 
     return response.data.backstory;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
+    const e = error as Error;
+    if (axios.isAxiosError(e)) {
       console.error(
         "Error generating backstory:",
-        error.response?.data || error.message
+        e.response?.data || e.message
       );
 
-      if (error.response?.status === 429) {
+      if (e.response?.status === 429) {
         console.error("Rate limit exceeded. Please try again later.");
       }
 
-      throw error;
+      throw e;
     } else {
-      console.error("Unexpected error:", error);
-      throw error;
+      console.error("Unexpected error:", e);
+      throw e;
     }
   }
 };
