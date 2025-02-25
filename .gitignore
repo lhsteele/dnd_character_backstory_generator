@@ -25,4 +25,4 @@ backend/.env
 *.sln
 *.sw?
 
-
+.vercel

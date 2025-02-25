@@ -11,7 +11,7 @@
     "outDir": "./dist",
     "incremental": true,
     "esModuleInterop": true,
-    "types": [],
+    "types": ["jest", "@testing-library/react"],
 
     /* Bundler mode */
     "moduleResolution": "Node",
