@@ -38,7 +38,12 @@ const TextArea: FunctionComponent<TextAreaProps> = ({
       <div className="text-area-container">
         {textLoading ? (
           <div className="loader">
-            <span className="material-symbols-outlined">hourglass</span>
+            <span
+              data-testid="loading-icon"
+              className="material-symbols-outlined"
+            >
+              hourglass
+            </span>
           </div>
         ) : (
           <textarea
