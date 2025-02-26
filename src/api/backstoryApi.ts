@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const generateBackstory = async (
   name: string,
   race: string,
@@ -9,17 +11,14 @@ export const generateBackstory = async (
   hasNickname?: boolean
 ) => {
   try {
-    const response = await axios.post(
-      "http://localhost:5000/generate-backstory",
-      {
-        name,
-        race,
-        characterClass,
-        trait,
-        tone,
-        hasNickname,
-      }
-    );
+    const response = await axios.post(`${BACKEND_URL}/generate-backstory`, {
+      name,
+      race,
+      characterClass,
+      trait,
+      tone,
+      hasNickname,
+    });
 
     return response.data.backstory;
   } catch (error) {

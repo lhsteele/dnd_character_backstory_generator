@@ -1,10 +1,10 @@
 import axios from "axios";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const generateRandomCharacterName = async () => {
   try {
-    const response = await axios.post(
-      "http://localhost:5000/generate-character-name"
-    );
+    const response = await axios.post(`${BACKEND_URL}/generate-character-name`);
     return response.data;
   } catch (error) {
     const e = error as Error;

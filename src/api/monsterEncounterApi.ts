@@ -1,12 +1,14 @@
 import axios from "axios";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const generateMonsterEncounter = async (
   monsterType: string,
   tone: string
 ) => {
   try {
     const response = await axios.post(
-      "http://localhost:5000/generate-monster-encounter",
+      `${BACKEND_URL}/generate-monster-encounter`,
       {
         monsterType,
         tone,
