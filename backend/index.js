@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { generateBackstory } from "./generateBackstory.js";
+import { generateRandomCharacterName } from "./generateRandomCharacterName.js";
+import { generateMonsterEncounter } from "./generateMonsterEncounter.js";
 
 dotenv.config();
 
