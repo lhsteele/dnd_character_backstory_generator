@@ -1,76 +1,82 @@
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-import { generateBackstory } from "./generateBackstory.js";
-import { generateRandomCharacterName } from "./generateRandomCharacterName.js";
-import { generateMonsterEncounter } from "./generateMonsterEncounter.js";
+// import express from "express";
+// import dotenv from "dotenv";
+// import cors from "cors";
+// import { generateBackstory } from "./generateBackstory.js";
+// import { generateRandomCharacterName } from "./generateRandomCharacterName.js";
+// import { generateMonsterEncounter } from "./generateMonsterEncounter.js";
 
-dotenv.config();
+// console.log("🚀 Server.js is running!");
+// dotenv.config();
 
-const app = express();
-const port = process.env.PORT || 3000;
+// const app = express();
+// const port = process.env.PORT || 3000;
 
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: "GET,POST",
-    allowedHeaders: "Content-Type",
-  })
-);
+// const allowedOrigins = [
+//   "http://localhost:5173",
+//   "https://dnd-character-backstory-generator.vercel.app",
+// ];
 
-app.use(express.json());
+// app.use(
+//   cors({
+//     origin: allowedOrigins,
+//     methods: "GET,POST",
+//     allowedHeaders: "Content-Type",
+//   })
+// );
 
-app.post("/generate-backstory", async (req, res) => {
-  try {
-    const { name, race, characterClass, trait, tone } = req.body;
+// app.use(express.json());
 
-    if (!name || !race || !characterClass || !trait || !tone) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
+// app.post("/generate-backstory", async (req, res) => {
+//   try {
+//     const { name, race, characterClass, trait, tone } = req.body;
 
-    const backstory = await generateBackstory(
-      name,
-      race,
-      characterClass,
-      trait,
-      tone
-    );
+//     if (!name || !race || !characterClass || !trait || !tone) {
+//       return res.status(400).json({ error: "All fields are required" });
+//     }
 
-    res.json({ backstory });
-  } catch (error) {
-    console.error("Error generating backstory:", error);
-    res.status(500).json({ error: "Error generating backstory" });
-  }
-});
+//     const backstory = await generateBackstory(
+//       name,
+//       race,
+//       characterClass,
+//       trait,
+//       tone
+//     );
 
-app.post("/generate-character-name", async (_, res) => {
-  try {
-    const name = await generateRandomCharacterName();
+//     res.json({ backstory });
+//   } catch (error) {
+//     console.error("Error generating backstory:", error);
+//     res.status(500).json({ error: "Error generating backstory" });
+//   }
+// });
 
-    res.json({ name });
-  } catch (error) {
-    console.error("Error generating name:", error);
-    res.status(500).json({ error: "Error generating name" });
-  }
-});
+// app.post("/generate-character-name", async (_, res) => {
+//   try {
+//     const name = await generateRandomCharacterName();
 
-app.post("/generate-monster-encounter", async (req, res) => {
-  try {
-    const { monsterType, tone } = req.body;
+//     res.json({ name });
+//   } catch (error) {
+//     console.error("Error generating name:", error);
+//     res.status(500).json({ error: "Error generating name" });
+//   }
+// });
 
-    if (!monsterType || !tone) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
+// app.post("/generate-monster-encounter", async (req, res) => {
+//   try {
+//     const { monsterType, tone } = req.body;
 
-    const encounter = await generateMonsterEncounter(monsterType, tone);
+//     if (!monsterType || !tone) {
+//       return res.status(400).json({ error: "All fields are required" });
+//     }
 
-    res.json({ encounter });
-  } catch (error) {
-    console.error("Error generating encounter:", error);
-    res.status(500).json({ error: "Error generating encounter" });
-  }
-});
+//     const encounter = await generateMonsterEncounter(monsterType, tone);
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+//     res.json({ encounter });
+//   } catch (error) {
+//     console.error("Error generating encounter:", error);
+//     res.status(500).json({ error: "Error generating encounter" });
+//   }
+// });
+
+// app.listen(port, () => {
+//   console.log(`Server is running on http://localhost:${port}`);
+// });
