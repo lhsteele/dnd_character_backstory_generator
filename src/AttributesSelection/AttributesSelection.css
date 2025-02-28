@@ -51,6 +51,18 @@
   width: min-content;
 }
 
+.random-name-error {
+  font-size: 0.7em;
+  color: red;
+}
+
+.generate-limit-error {
+  font-size: 1em;
+  color: red;
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 767px) {
   .attributes-selection {
     padding: 20px;

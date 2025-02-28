@@ -9,6 +9,7 @@ import TextArea from "../Components/TextArea/TextArea";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiceD20 } from "@fortawesome/free-solid-svg-icons";
 import useRandomRoll from "../hooks/useRandomRoll";
+import { requestWithinLimitCount } from "../helpers";
 
 const MonstersSelection: FunctionComponent = () => {
   const { data, error, loading } = useFetch<{
@@ -27,6 +28,7 @@ const MonstersSelection: FunctionComponent = () => {
   const [displayedEncounter, setDisplayedEncounter] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [randomGenerationLoading, setRandomGenerationLoading] = useState(false);
+  const [generateLimitError, setGenerateLimitError] = useState("");
 
   const { randomMonsterIdx, randomToneIdx, rollRandomAttributes } =
     useRandomRoll(0, 0, 0, data?.monsters?.results.length);
@@ -63,7 +65,15 @@ const MonstersSelection: FunctionComponent = () => {
         setEncounterLoading(false);
       }
     };
-    getEncounter();
+
+    if (!requestWithinLimitCount("monster")) {
+      setGenerateLimitError(
+        "You've reached your daily limit of 5 encounter requests. Please try again tomorrow."
+      );
+      return;
+    } else {
+      getEncounter();
+    }
   };
 
   const handleSelect = (
@@ -157,6 +167,9 @@ const MonstersSelection: FunctionComponent = () => {
           </div>
         )}
       </div>
+      {generateLimitError ? (
+        <span className="generate-limit-error">{generateLimitError}</span>
+      ) : null}
       <TextArea
         ctaDisabled={!optionsFullyFilled}
         ctaText="Generate encounter"

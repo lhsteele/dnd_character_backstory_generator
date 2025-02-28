@@ -9,10 +9,7 @@ export const generateRandomCharacterName = async () => {
   } catch (error) {
     const e = error as Error;
     if (axios.isAxiosError(e)) {
-      console.error(
-        "Error generating backstory:",
-        e.response?.data || e.message
-      );
+      console.error("Error generating name:", e.message);
 
       if (e.response?.status === 429) {
         console.error("Rate limit exceeded. Please try again later.");

@@ -15,6 +15,14 @@
   gap: 20px;
 }
 
+.generate-limit-error {
+  margin-top: 20px;
+  font-size: 1em;
+  color: red;
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 767px) {
   .monster-selection {
     padding: 20px;

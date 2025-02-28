@@ -10,9 +10,11 @@ import { faDiceD20 } from "@fortawesome/free-solid-svg-icons";
 import useRandomRoll from "../hooks/useRandomRoll";
 import { generateRandomCharacterName } from "../api/randomCharacterNameApi";
 import TextArea from "../Components/TextArea/TextArea";
+import { requestWithinLimitCount } from "../helpers";
 
 const AttributesSelection: FunctionComponent = () => {
   const [inputValue, setInputValue] = useState("");
+  const [randomCharacterNameError, setRandomCharacterNameError] = useState("");
   const { data, error, loading } = useFetch<{
     results: { index: string; name: string }[];
   }>(["classes", "races", "traits"]);
@@ -34,6 +36,7 @@ const AttributesSelection: FunctionComponent = () => {
   const [hasNickname, setHasNickname] = useState(false);
   const [randomGenerationLoading, setRandomGenerationLoading] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const [generateLimitError, setGenerateLimitError] = useState("");
 
   const {
     randomClassIdx,
@@ -88,7 +91,7 @@ const AttributesSelection: FunctionComponent = () => {
       setInputValue(name);
     } catch (error) {
       const e = error as Error;
-      console.error(e);
+      setRandomCharacterNameError(e.message);
     }
     setRandomGenerationLoading(false);
   };
@@ -135,7 +138,14 @@ const AttributesSelection: FunctionComponent = () => {
         }
       };
 
-      getBackstory();
+      if (!requestWithinLimitCount("character")) {
+        setGenerateLimitError(
+          "You've reached your daily limit of 5 backstory requests. Please try again tomorrow."
+        );
+        return;
+      } else {
+        getBackstory();
+      }
     }
   };
 
@@ -170,12 +180,20 @@ const AttributesSelection: FunctionComponent = () => {
           <label htmlFor="character-name-input" className="attributes-label ">
             Character name:
           </label>
-          <input
-            id="character-name-input"
-            className="character-name-input"
-            value={inputValue}
-            onChange={handleInputChange}
-          />
+          <>
+            <input
+              id="character-name-input"
+              className="character-name-input"
+              value={inputValue}
+              onChange={handleInputChange}
+              autoComplete="off"
+            />
+            {randomCharacterNameError ? (
+              <div className="random-name-error">
+                {randomCharacterNameError}
+              </div>
+            ) : null}
+          </>
           <div className="nickname-container">
             <input
               type="checkbox"
@@ -249,6 +267,9 @@ const AttributesSelection: FunctionComponent = () => {
           </div>
         )}
       </div>
+      {generateLimitError ? (
+        <span className="generate-limit-error">{generateLimitError}</span>
+      ) : null}
       <TextArea
         ctaDisabled={!optionsFullyFilled}
         ctaText="Generate backstory"

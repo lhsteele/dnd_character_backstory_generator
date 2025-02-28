@@ -36,3 +36,35 @@ export const copyTextToClipboard = (
     setCopied(true);
   }
 };
+
+// Helper function to manage rate limiting
+export const requestWithinLimitCount = (
+  requestType: "character" | "monster"
+): boolean => {
+  const today = new Date().toISOString().split("T")[0];
+  const rateLimitKey = `${requestType}-requests-${today}`;
+
+  const cleanupOldEntries = () => {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (
+        key &&
+        key.startsWith(`${requestType}-requests-`) &&
+        !key.includes(today)
+      ) {
+        localStorage.removeItem(key);
+      }
+    }
+  };
+
+  cleanupOldEntries();
+
+  const currentCount = parseInt(localStorage.getItem(rateLimitKey) || "0");
+  console.log(currentCount);
+  if (currentCount > 5) {
+    return false;
+  }
+
+  localStorage.setItem(rateLimitKey, (currentCount + 1).toString());
+  return true;
+};
