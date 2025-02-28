@@ -1,6 +1,6 @@
 # D&D Character Generator
 
-<a href="https://dnd-character-backstory-generator.vercel.app/character" target="_blank">Give it a roll!</a>
+[Give it a roll!](https://dnd-character-backstory-generator.vercel.app/character)
 
 Create a unique character backstory or an engaging monster encounter with the help of an AI-powered generator.
 
