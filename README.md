@@ -1,50 +1,25 @@
-# React + TypeScript + Vite
+# D&D Character Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Create a unique character backstory or an engaging monster encounter with the help of an AI-powered generator.
 
-Currently, two official plugins are available:
+You can customize the tone of the output:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Kid-friendly: Lighthearted and free of dark or mature themes.
+- Young adult: May include darker elements while remaining appropriate for teens.
 
-## Expanding the ESLint configuration
+## Character backstory
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Customize your character by selecting:
 
-- Configure the top-level `parserOptions` property like this:
+- Class, race, and key trait
+- A name (with an optional nickname)
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Monster encounter
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Choose the type of monster to generate a unique encounter.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Random roll
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Want an entirely random result? You can roll for a fully randomized character or monster. If rolling for a character, a name will be generated for you as well!
+
+[D&D Character Generator](/D&D_character_generator.mov)
