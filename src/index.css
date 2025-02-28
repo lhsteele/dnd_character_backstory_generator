@@ -5,14 +5,14 @@
   font-family: GermaniaOne;
   height: 100vh;
   width: 100vw;
-  background-color: #8c4c13;
+  background-color: #b89d47;
 }
 
 .germania-one-regular {
   font-family: "Germania One", serif;
   font-weight: 400;
   font-style: normal;
-  color: #4f565c;
+  color: #053229;
   letter-spacing: 0.15rem;
 }
 
@@ -28,4 +28,57 @@ body {
 *::before,
 *::after {
   box-sizing: inherit;
+}
+
+@property --color-1 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #000;
+}
+
+@property --color-2 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #000;
+}
+
+@keyframes color-change {
+  to {
+    --color-1: var(--_color-1-to);
+    --color-2: var(--_color-2-to);
+  }
+}
+
+/* gradient animation for Random button */
+.random-btn-label {
+  font-size: 1.5em;
+
+  --_space: ;
+
+  --_color-1-from: #fdc1b4;
+  --_color-1-to: #fe9179;
+  --_color-2-from: #72b0ab;
+  --_color-2-to: #355e58;
+  --color-1: var(--_color-1-from);
+  --color-2: var(--_color-2-from);
+
+  animation: color-change 2s linear infinite alternate;
+
+  background: linear-gradient(
+    to right var(--_space),
+    var(--color-1),
+    var(--color-2)
+  );
+
+  /* old browser support */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* modern browser version */
+  background-clip: text;
+  color: transparent;
+
+  @supports (background: linear-gradient(in oklch, #fff, #fff)) {
+    --_space: in oklch;
+  }
 }

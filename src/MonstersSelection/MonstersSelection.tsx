@@ -160,7 +160,7 @@ const MonstersSelection: FunctionComponent = () => {
           </div>
         ) : (
           <div className="randomizer-btn-container">
-            <label>Random</label>
+            <label className="random-btn-label">Random</label>
             <button data-testid="random-btn" onClick={handleRandomize}>
               <FontAwesomeIcon icon={faDiceD20} size="2x" />
             </button>

@@ -1,5 +1,5 @@
 .page-header {
-  background-color: #f4cfd9;
+  background-color: #fdc1b4;
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -15,7 +15,7 @@ h1 {
   flex-direction: column;
   width: 100%;
   justify-content: flex-end;
-  background-color: #f36b2b;
+  background-color: #bcdddc;
 }
 
 .header-button {

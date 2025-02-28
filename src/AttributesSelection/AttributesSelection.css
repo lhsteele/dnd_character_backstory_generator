@@ -1,5 +1,5 @@
 .attributes-selection {
-  background-color: #f4e1c3;
+  background-color: #ffedd1;
   padding: 50px;
 }
 
@@ -17,8 +17,8 @@
 
 .attribute-select,
 .character-name-input {
-  background-color: #f4e1c3;
-  border: 1px solid #4f565c;
+  background-color: #ffedd1;
+  border: 1px solid #053229;
   border-radius: 8px;
   padding: 5px;
 }
