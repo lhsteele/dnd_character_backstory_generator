@@ -24,4 +24,5 @@ Customize your character by selecting:
 
 - Want an entirely random result? You can roll for a fully randomized character or monster. If rolling for a character, a name will be generated for you as well!
 
-[D&D Character Generator](/D&D_character_generator.mov)
+
+<img width="1791" alt="dnd_character_generator" src="https://github.com/user-attachments/assets/1542cf08-19af-4fe2-b025-157313f16d41" />
