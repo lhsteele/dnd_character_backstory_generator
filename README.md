@@ -1,5 +1,7 @@
 # D&D Character Generator
 
+https://dnd-character-backstory-generator.vercel.app/character
+
 Create a unique character backstory or an engaging monster encounter with the help of an AI-powered generator.
 
 You can customize the tone of the output:
