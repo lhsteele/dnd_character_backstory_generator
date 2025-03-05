@@ -24,4 +24,6 @@ Customize your character by selecting:
 
 - Want an entirely random result? You can roll for a fully randomized character or monster. If rolling for a character, a name will be generated for you as well!
 
+Built with React, TypeScript, and Vite on the frontend, with a Node.js backend. Deployed using Vercel for the frontend and Render for the backend.
+
 <img width="1791" alt="dnd_character_generator" src="https://github.com/user-attachments/assets/1542cf08-19af-4fe2-b025-157313f16d41" />
