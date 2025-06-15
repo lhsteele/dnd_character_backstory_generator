@@ -14,7 +14,9 @@ export async function generateBackstory(
   hasNickname
 ) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({
+      model: "models/gemini-1.5-flash",
+    });
 
     const prompt = `Create a DnD character backstory for a ${race} ${characterClass} named ${name}. 
         The character has the following trait: ${trait}. 
